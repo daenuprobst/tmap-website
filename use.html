@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SmilesDrawer 2.0</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/base16/dracula.min.css"
+        integrity="sha512-zKpFlhUX8c+WC6H/XTJavnEpWFt2zH9BU9vu0Hry5Y+SEgG21pRMFcecS7DgDXIegXBQ3uK9puwWPP3h6WSR9g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" />
+    <style>
+        pre {
+            padding: 0 !important;
+        }
+
+        code {
+            border-radius: 5px;
+        }
+
+        p>code.hljs {
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                SmilesDrawer 2.0
+            </h1>
+            <p class="subtitle">
+                No server, no images, no templates, just a SMILES 😊
+            </p>
+            Using for academic work? Please <b>cite</b>: <a
+                href="https://doi.org/10.1021/acs.jcim.7b00425">10.1021/acs.jcim.7b00425</a>
+            <br />
+            <br />
+
+            <a class="button is-small" href="index.html">Home</a>
+            <a class="button is-small" href="use.html">Use</a>
+            <a class="button is-small" href="playground.html">Playground</a>
+            <a class="button is-small" href="https://github.com/reymond-group/smilesDrawer">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Source</span>
+            </a>
+            <br />
+            <br />
+            <div class="content">
+                <h3>Get started</h3>
+                <p>Using SmilesDrawer is pretty easy. Just include the script in your HTML document and use the
+                    <code>data-smiles</code> attribute on an <code>img</code> or <code>svg</code> element to set the
+                    SMILES.
+                    In addition, you can use the <code>data-smiles-options</code> attribute to set SmilesDrawer options,
+                    such as the with and height.
+                </p>
+                <p>
+                    Important: Don't forget to call <code>SmiDrawer.apply()</code> in a <code>script</code> block just
+                    before the closing tag of the <code>body</code> element or nothing will happen.
+                </p>
+                <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;img data-smiles=&quot;OC(C(=O)O[C@H]1C[N+]2(CCCOC3=CC=CC=C3)CCC1CC2)(C1=CC=CS1)C1=CC=CS1&quot; 
+            data-smiles-options=&quot;{ 'width': 800, 'height': 800 }&quot; /&gt;
+                                
+    &lt;svg data-smiles=&quot;C=CCBr.[Na+].[I-]&gt;CC(=O)C&gt;C=CCI.[Na+].[Br-]  __{'textBelowArrow': '90%'}__&quot; /&gt;
+
+    &lt;script type=&quot;text/javascript&quot; src=&quot;https://unpkg.com/smiles-drawer@2.0.1/dist/smiles-drawer.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        SmiDrawer.apply();
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                <p class="is-clearfix">
+                    <a class="button is-text is-pulled-right" href="https://jsitor.com/vqh7E-Ol1">Live
+                        Example</a>
+                </p>
+                <p>
+                    If you want to to load and display a SMILES string without refreshing the page you can do this as
+                    well. For this you just have to create an instance of the <code>SmiDrawer</code> class.
+                </p>
+                <p>
+                    Now I could put a list of possible options and settings for <code>moleculeOptions</code> and
+                    <code>reactionOptions</code> here, but it is just easier to head over to the <a
+                        class="button is-small" href="playground.html">Playground</a> and set then export them there.
+                </p>
+                <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;img id=&quot;imgExample&quot; data-smiles-options=&quot;{ 'width': 400, 'height': 400 }&quot; /&gt;
+
+    &lt;div style=&quot;background-color: #000&quot;&gt;
+        &lt;svg id=&quot;svgExample&quot; /&gt;
+    &lt;/div&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;https://unpkg.com/smiles-drawer@2.0.1/dist/smiles-drawer.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        let moleculeOptions = {};
+        let reactionOptions = {};
+
+        let sd = new SmiDrawer(moleculeOptions, reactionOptions);
+        sd.draw('OC(C(=O)O[C@H]1C[N+]2(CCCOC3=CC=CC=C3)CCC1CC2)(C1=CC=CS1)C1=CC=CS1', '#imgExample')
+        sd.draw('C=CCBr.[Na+].[I-]&gt;CC(=O)C&gt;C=CCI.[Na+].[Br-]', '#svgExample', 'dark')
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre>
+                <p class="is-clearfix">
+                    <a class="button is-text is-pulled-right" href="https://jsitor.com/VSdIPakuF">Live
+                        Example</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"
+        integrity="sha512-yUUc0qWm2rhM7X0EFe82LNnv2moqArj5nro/w1bi05A09hRVeIZbN6jlMoyu0+4I/Bu4Ck/85JQIU82T82M28w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+    <script>
+        hljs.addPlugin(new CopyButtonPlugin());
+        hljs.highlightAll();
+    </script>
+</body>
+
+</html>
